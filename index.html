@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Formulário | Falta de Peça</title>
+<title>Formulário de Acompanhamento | Falta de Peça</title>
 
 <style>
 body {
@@ -20,15 +20,32 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-h1 {
+/* HEADER */
+.header {
+    display: flex;
+    align-items: center;
     background-color: #002f6c;
-    color: white;
-    text-align: center;
-    padding: 14px;
+    padding: 12px 16px;
     border-radius: 4px;
-    font-size: 22px;
+    margin-bottom: 15px;
 }
 
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-right: 15px;
+}
+
+.header-title {
+    flex: 1;
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* TABLE */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -48,9 +65,9 @@ th {
 
 input, select, textarea {
     width: 100%;
-    padding: 6px;
+    padding: 5px;
     box-sizing: border-box;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 textarea {
@@ -68,17 +85,30 @@ textarea {
 
 .btn {
     margin-top: 20px;
-    padding: 12px 22px;
+    padding: 10px 20px;
     background-color: #002f6c;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 10px;
 }
 
 .btn:hover {
     background-color: #004a99;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 </style>
 </head>
@@ -86,59 +116,88 @@ textarea {
 <body>
 
 <div class="container">
-<h1>FORMULÁRIO DE ACOMPANHAMENTO | FALTA DE PEÇA</h1>
 
-<table id="tabela">
-<thead>
-<tr>
-    <th>DATA</th>
-    <th>LÍDER QUALIDADE</th>
-    <th>TURNO</th>
-    <th>QTD CX</th>
-    <th>ITEM</th>
-    <th>OCORRÊNCIA</th>
-    <th>VISTO</th>
-</tr>
-</thead>
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">N.</div>
+        <div class="header-title">
+            FORMULÁRIO DE ACOMPANHAMENTO | FALTA DE PEÇA
+        </div>
+    </div>
 
-<tbody>
-<tr>
-    <td><input type="date" required></td>
-    <td><input type="text" placeholder="Nome do líder" required></td>
-    <td>
-        <select required>
-            <option value="">Selecione</option>
-            <option>T1</option>
-            <option>T2</option>
-            <option>T3</option>
-        </select>
-    </td>
-    <td><input type="number" min="1" required></td>
-    <td><input type="text" required></td>
-    <td>
-        <select required>
-            <option value="">Selecione</option>
-            <option>Falta de CX</option>
-            <option>Falta de Estojo</option>
-            <option>Mistura de Item</option>
-            <option>Falta de Insumos</option>
-            <option>Falta de PC</option>
-            <option>Sobra de CX</option>
-            <option>Sobra de PC</option>
-        </select>
-    </td>
-    <td><input type="text"></td>
-</tr>
-</tbody>
-</table>
+    <form id="formulario">
 
-<button class="btn" onclick="adicionarLinha()">Adicionar nova ocorrência</button>
+        <table id="tabela">
+            <thead>
+                <tr>
+                    <th>DATA</th>
+                    <th>LÍDER QUALIDADE</th>
+                    <th>TURNO</th>
+                    <th>QTD CX</th>
+                    <th>ITEM</th>
+                    <th>OCORRÊNCIA</th>
+                    <th>VISTO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="date" required></td>
 
-<div class="section-title">OBSERVAÇÕES GERAIS</div>
-<textarea id="obs" rows="4" placeholder="Observações gerais, causa raiz, ação tomada, etc."></textarea>
+                    <td>
+                        <input type="text" placeholder="Digite o nome do líder" required>
+                    </td>
 
-<button class="btn" onclick="enviarWhatsApp()">Enviar para WhatsApp</button>
+                    <td>
+                        <select required>
+                            <option value="">Selecione</option>
+                            <option>T1</option>
+                            <option>T2</option>
+                            <option>T3</option>
+                        </select>
+                    </td>
 
+                    <td>
+                        <input type="number" min="1" placeholder="Ex: 10" required>
+                    </td>
+
+                    <td>
+                        <input type="text" placeholder="Código ou descrição do item" required>
+                    </td>
+
+                    <td>
+                        <select required>
+                            <option value="">Selecione</option>
+                            <option>Falta de CX</option>
+                            <option>Falta de Estojo</option>
+                            <option>Mistura de Item</option>
+                            <option>Falta de Insumos</option>
+                            <option>Falta de PC</option>
+                            <option>Sobra de CX</option>
+                            <option>Sobra de PC</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <input type="text" placeholder="Opcional">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="section-title">OBSERVAÇÕES</div>
+        <textarea rows="4" placeholder="Descreva detalhes da ocorrência, causa, ação tomada, etc."></textarea>
+
+        <div class="actions">
+            <button type="button" class="btn btn-secondary" onclick="adicionarLinha()">
+                + Adicionar Ocorrência
+            </button>
+
+            <button type="button" class="btn" onclick="enviarWhatsApp()">
+                Enviar para WhatsApp
+            </button>
+        </div>
+
+    </form>
 </div>
 
 <script>
@@ -146,31 +205,34 @@ function adicionarLinha() {
     const tabela = document.getElementById("tabela").getElementsByTagName("tbody")[0];
     const novaLinha = tabela.rows[0].cloneNode(true);
 
-    novaLinha.querySelectorAll("input, select").forEach(campo => campo.value = "");
+    // Limpa os campos da nova linha
+    Array.from(novaLinha.querySelectorAll("input, select")).forEach(campo => {
+        campo.value = "";
+    });
+
     tabela.appendChild(novaLinha);
 }
 
 function enviarWhatsApp() {
     const linhas = document.querySelectorAll("#tabela tbody tr");
-    let mensagem = "📋 *Formulário de Acompanhamento | Falta de Peça*%0A%0A";
+    let mensagem = "FORMULÁRIO - FALTA DE PEÇA%0A%0A";
 
     linhas.forEach((linha, index) => {
         const campos = linha.querySelectorAll("input, select");
-        if (campos[0].value !== "") {
-            mensagem += `➡️ *Ocorrência ${index + 1}*%0A`;
-            mensagem += `Data: ${campos[0].value}%0A`;
-            mensagem += `Líder Qualidade: ${campos[1].value}%0A`;
-            mensagem += `Turno: ${campos[2].value}%0A`;
-            mensagem += `Qtd CX: ${campos[3].value}%0A`;
-            mensagem += `Item: ${campos[4].value}%0A`;
-            mensagem += `Ocorrência: ${campos[5].value}%0A`;
-            mensagem += `Visto: ${campos[6].value || "-"}%0A%0A`;
-        }
+
+        mensagem += `Ocorrência ${index + 1}%0A`;
+        mensagem += `Data: ${campos[0].value}%0A`;
+        mensagem += `Líder Qualidade: ${campos[1].value}%0A`;
+        mensagem += `Turno: ${campos[2].value}%0A`;
+        mensagem += `Qtd CX: ${campos[3].value}%0A`;
+        mensagem += `Item: ${campos[4].value}%0A`;
+        mensagem += `Ocorrência: ${campos[5].value}%0A`;
+        mensagem += `Visto: ${campos[6].value || "Não informado"}%0A%0A`;
     });
 
-    const obs = document.getElementById("obs").value;
+    const obs = document.querySelector("textarea").value;
     if (obs) {
-        mensagem += `📝 *Observações:*%0A${obs}%0A`;
+        mensagem += `Observações:%0A${obs}`;
     }
 
     const url = `https://wa.me/?text=${mensagem}`;
